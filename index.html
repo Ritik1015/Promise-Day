@@ -8,153 +8,166 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
 
-*{
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
+*{box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-  overflow:hidden;
+  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
 }
 
 .card{
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 30px 25px;
-  text-align:center;
   width:90%;
-  max-width:380px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  animation: fadeIn 1.5s ease;
+  max-width:400px;
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+  color:#fff;
+  box-shadow:0 15px 35px rgba(0,0,0,0.25);
+  animation:fadeIn 1.2s ease;
 }
 
-h1{
-  color:#fff;
-  font-size:26px;
-  margin-bottom:10px;
-}
-
-.name{
-  color:#fff;
-  font-weight:600;
-  font-size:18px;
-}
-
-.from{
-  margin-top:8px;
-  font-size:14px;
-  color:#fff;
-  opacity:0.9;
-}
+h1{margin-bottom:5px;}
+.from{font-size:14px;opacity:.9;margin-bottom:15px;}
 
 .heart{
-  font-size:40px;
-  animation: beat 1s infinite;
-  margin:15px 0;
+  font-size:36px;
+  animation:beat 1s infinite;
+  margin-bottom:15px;
 }
 
-button{
-  margin-top:20px;
-  padding:12px 22px;
+.promise-btn{
+  width:100%;
+  padding:12px;
+  margin:6px 0;
   border:none;
-  border-radius:25px;
-  font-size:15px;
-  cursor:pointer;
+  border-radius:20px;
+  font-size:14px;
+  font-weight:500;
   background:#fff;
   color:#ff5e78;
-  font-weight:600;
-  transition:0.3s;
+  cursor:pointer;
+  transition:.3s;
 }
 
-button:hover{
-  transform:scale(1.05);
+.promise-btn:hover{transform:scale(1.04);}
+
+.promise-text{
+  display:none;
+  margin-top:15px;
+  font-size:14px;
+  line-height:1.6;
+  animation:fadeUp .8s ease;
 }
 
-.promise-box{
+/* Special last promise */
+.special{
   display:none;
   margin-top:20px;
-  color:#fff;
+  padding:18px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
   font-size:15px;
-  line-height:1.6;
-  animation: fadeUp 1s ease;
+  font-weight:600;
+  animation:glow 1.5s infinite alternate;
 }
 
-/* floating hearts */
-span.floating{
-  position:absolute;
-  font-size:18px;
-  animation: float 6s linear infinite;
-  opacity:0.6;
-}
-
+/* animations */
 @keyframes fadeIn{
-  from{opacity:0; transform:scale(0.9);}
-  to{opacity:1; transform:scale(1);}
+  from{opacity:0;transform:scale(.9);}
+  to{opacity:1;transform:scale(1);}
 }
-
 @keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
+  from{opacity:0;transform:translateY(15px);}
+  to{opacity:1;transform:translateY(0);}
 }
-
 @keyframes beat{
   0%,100%{transform:scale(1);}
   50%{transform:scale(1.2);}
 }
-
-@keyframes float{
-  0%{bottom:-10%; opacity:0;}
-  50%{opacity:0.8;}
-  100%{bottom:110%; opacity:0;}
+@keyframes glow{
+  from{box-shadow:0 0 10px rgba(255,255,255,.4);}
+  to{box-shadow:0 0 25px rgba(255,255,255,.9);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- floating hearts -->
-<script>
-for(let i=0;i<15;i++){
-  let heart=document.createElement("span");
-  heart.className="floating";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"%";
-  heart.style.animationDelay=Math.random()*6+"s";
-  document.body.appendChild(heart);
-}
-</script>
+<!-- Song (autoplay GitHub-safe) -->
+<audio id="song" src="song.mp3" loop></audio>
 
-<div class="card">
+<div class="card" onclick="playSong()">
   <h1>Happy Promise Day ❤️</h1>
-  <div class="name">My Love Bhavya</div>
+  <div class="from">My Love Bhavya<br>— From dudu</div>
 
   <div class="heart">💖</div>
 
-  <div class="from">— From dudu</div>
+  <button class="promise-btn" onclick="showPromise(1)">
+    Promise 1 🤍
+  </button>
+  <button class="promise-btn" onclick="showPromise(2)">
+    Promise 2 🤍
+  </button>
+  <button class="promise-btn" onclick="showPromise(3)">
+    Promise 3 🤍
+  </button>
+  <button class="promise-btn" onclick="showPromise(4)">
+    Promise 4 🤍
+  </button>
+  <button class="promise-btn" onclick="showPromise(5)">
+    Promise 5 🤍
+  </button>
+  <button class="promise-btn" onclick="showPromise(6)">
+    💍 Special Promise 💍
+  </button>
 
-  <button onclick="showPromise()">Click for my promise 🤍</button>
-
-  <div class="promise-box" id="promise">
-    I promise to stand by you in every situation,  
-    to respect you, support your dreams,  
-    hold your hand on bad days,  
-    and love you a little more every single day. 💕  
-    <br><br>
-    No matter what happens,  
-    **you and me — always.**
+  <div id="p1" class="promise-text">
+    Bhavya mai promise krta hu mai hamesha aapko khush rakhunga ❤️
   </div>
+
+  <div id="p2" class="promise-text">
+    I promise mai kabhi apka saath nahi chodunga 🤞
+  </div>
+
+  <div id="p3" class="promise-text">
+    Mai waada karta hu chahe kuch bhi karna pade mai apko kbhi problem me nahi aane dunga 💪
+  </div>
+
+  <div id="p4" class="promise-text">
+    Apko kbhi bhi meri zarurat pade mai hmesha apke liye available rahunga 🫂
+  </div>
+
+  <div id="p5" class="promise-text">
+    Mai zindagi bhar k liye sirf aur sirf aapka rahunga 💖
+  </div>
+
+  <div id="p6" class="special">
+    Mai zindagi bhar aapse pyaar krta rahunga  
+    <br><br>
+    No matter hum sath ho ya na ho,  
+    <br>
+    **I will love you till my last breath.** ❤️
+  </div>
+
 </div>
 
 <script>
-function showPromise(){
-  document.getElementById("promise").style.display="block";
+function showPromise(n){
+  document.querySelectorAll('.promise-text,.special')
+    .forEach(p=>p.style.display='none');
+
+  document.getElementById('p'+n).style.display='block';
+}
+
+function playSong(){
+  const song=document.getElementById("song");
+  if(song.paused) song.play();
 }
 </script>
 
