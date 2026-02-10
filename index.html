@@ -7,7 +7,6 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
 *{box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
@@ -29,7 +28,6 @@ body{
   text-align:center;
   color:#fff;
   box-shadow:0 15px 35px rgba(0,0,0,0.25);
-  animation:fadeIn 1.2s ease;
 }
 
 h1{margin-bottom:5px;}
@@ -48,58 +46,27 @@ h1{margin-bottom:5px;}
   border:none;
   border-radius:20px;
   font-size:14px;
-  font-weight:500;
   background:#fff;
   color:#ff5e78;
   cursor:pointer;
-  transition:.3s;
 }
-
-.promise-btn:hover{transform:scale(1.04);}
 
 .promise-text{
   display:none;
   margin-top:15px;
   font-size:14px;
   line-height:1.6;
-  animation:fadeUp .8s ease;
 }
 
-/* Special last promise */
-.special{
-  display:none;
-  margin-top:20px;
-  padding:18px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#ff758c,#ff7eb3);
-  font-size:15px;
-  font-weight:600;
-  animation:glow 1.5s infinite alternate;
-}
-
-/* animations */
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(.9);}
-  to{opacity:1;transform:scale(1);}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(15px);}
-  to{opacity:1;transform:translateY(0);}
-}
 @keyframes beat{
   0%,100%{transform:scale(1);}
   50%{transform:scale(1.2);}
-}
-@keyframes glow{
-  from{box-shadow:0 0 10px rgba(255,255,255,.4);}
-  to{box-shadow:0 0 25px rgba(255,255,255,.9);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Song (autoplay GitHub-safe) -->
 <audio id="song" src="song.mp3" loop></audio>
 
 <div class="card" onclick="playSong()">
@@ -108,66 +75,48 @@ h1{margin-bottom:5px;}
 
   <div class="heart">💖</div>
 
-  <button class="promise-btn" onclick="showPromise(1)">
-    Promise 1 🤍
-  </button>
-  <button class="promise-btn" onclick="showPromise(2)">
-    Promise 2 🤍
-  </button>
-  <button class="promise-btn" onclick="showPromise(3)">
-    Promise 3 🤍
-  </button>
-  <button class="promise-btn" onclick="showPromise(4)">
-    Promise 4 🤍
-  </button>
-  <button class="promise-btn" onclick="showPromise(5)">
-    Promise 5 🤍
-  </button>
-  <button class="promise-btn" onclick="showPromise(6)">
+  <button class="promise-btn" onclick="showPromise(1)">Promise 1 🤍</button>
+  <button class="promise-btn" onclick="showPromise(2)">Promise 2 🤍</button>
+  <button class="promise-btn" onclick="showPromise(3)">Promise 3 🤍</button>
+  <button class="promise-btn" onclick="showPromise(4)">Promise 4 🤍</button>
+  <button class="promise-btn" onclick="showPromise(5)">Promise 5 🤍</button>
+
+  <!-- 6th promise → NEXT PAGE -->
+  <button class="promise-btn" onclick="goNext()">
     💍 Special Promise 💍
   </button>
 
   <div id="p1" class="promise-text">
     Bhavya mai promise krta hu mai hamesha aapko khush rakhunga ❤️
   </div>
-
   <div id="p2" class="promise-text">
     I promise mai kabhi apka saath nahi chodunga 🤞
   </div>
-
   <div id="p3" class="promise-text">
     Mai waada karta hu chahe kuch bhi karna pade mai apko kbhi problem me nahi aane dunga 💪
   </div>
-
   <div id="p4" class="promise-text">
     Apko kbhi bhi meri zarurat pade mai hmesha apke liye available rahunga 🫂
   </div>
-
   <div id="p5" class="promise-text">
     Mai zindagi bhar k liye sirf aur sirf aapka rahunga 💖
   </div>
-
-  <div id="p6" class="special">
-    Mai zindagi bhar aapse pyaar krta rahunga  
-    <br><br>
-    No matter hum sath ho ya na ho,  
-    <br>
-    **I will love you till my last breath.** ❤️
-  </div>
-
 </div>
 
 <script>
 function showPromise(n){
-  document.querySelectorAll('.promise-text,.special')
+  document.querySelectorAll('.promise-text')
     .forEach(p=>p.style.display='none');
-
   document.getElementById('p'+n).style.display='block';
 }
 
+function goNext(){
+  window.location.href="promise6.html";
+}
+
 function playSong(){
-  const song=document.getElementById("song");
-  if(song.paused) song.play();
+  const s=document.getElementById("song");
+  if(s.paused) s.play();
 }
 </script>
 
